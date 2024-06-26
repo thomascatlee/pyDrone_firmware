@@ -229,65 +229,9 @@ extern const struct _mp_obj_module_t mp_module_network;
 extern const struct _mp_obj_module_t mp_module_onewire;
 
 //01studio
-extern const struct _mp_obj_module_t touch_module;
-extern const struct _mp_obj_module_t tftlcd_module;
-extern const struct _mp_obj_module_t esp_usb_module;
-extern const struct _mp_obj_module_t sensor_module;
-extern const struct _mp_obj_module_t gui_module;
-extern const struct _mp_obj_module_t game_module;
-extern const struct _mp_obj_module_t controller_module;
-extern const struct _mp_obj_module_t espai_module;
+
 extern const struct _mp_obj_module_t espdrone_module;
 
-#if MICROPY_ENABLE_TOUCH
-#define TOUCH_MODULE              { MP_ROM_QSTR(MP_QSTR_touch), MP_ROM_PTR(&touch_module) },
-#else
-#define TOUCH_MODULE
-#endif
-
-#if MICROPY_ENABLE_TFTLCD
-#define TFTLCD_MODULE              { MP_ROM_QSTR(MP_QSTR_tftlcd), MP_ROM_PTR(&tftlcd_module) },
-#else
-#define TFTLCD_MODULE
-#endif
-
-#if MICROPY_ENABLE_GUI
-#define GUI_MODULE              { MP_ROM_QSTR(MP_QSTR_gui), MP_ROM_PTR(&gui_module) },
-#define MICROPY_PORT_ROOT_GUI struct _gui_button_obj_t *gui_btn_obj_all[GUI_BTN_NUM_MAX];
-#else
-#define GUI_MODULE
-#define MICROPY_PORT_ROOT_GUI
-#endif
-
-#if MICROPY_ENABLE_SENSOR
-#define SENSOR_MODULE              { MP_ROM_QSTR(MP_QSTR_sensor), MP_ROM_PTR(&sensor_module) },
-#else
-#define SENSOR_MODULE
-#endif
-
-#if MICROPY_HW_ESPAI
-#define USB_ESPAI_MODULE              { MP_ROM_QSTR(MP_QSTR_esp_ai), MP_ROM_PTR(&espai_module) },
-#else
-#define USB_ESPAI_MODULE
-#endif
-
-#if MICROPY_ENABLE_ESP_USB
-#define USB_CAM_MODULE              { MP_ROM_QSTR(MP_QSTR_esp_usb), MP_ROM_PTR(&esp_usb_module) },
-#else
-#define USB_CAM_MODULE
-#endif
-
-#if MICROPY_ENABLE_GAME
-#define GAME_MODULE              { MP_ROM_QSTR(MP_QSTR_game), MP_ROM_PTR(&game_module) },
-#else
-#define GAME_MODULE
-#endif
-
-#if MICROPY_ENABLE_CONTROLLER
-#define CONTROLLER_MODULE              { MP_ROM_QSTR(MP_QSTR_controller), MP_ROM_PTR(&controller_module) },
-#else
-#define CONTROLLER_MODULE
-#endif
 
 #if MICROPY_ENABLE_ESP_DRONE
 #define ESP_DRONE_MODULE              { MP_ROM_QSTR(MP_QSTR_drone), MP_ROM_PTR(&espdrone_module) },
@@ -305,14 +249,6 @@ extern const struct _mp_obj_module_t espdrone_module;
     { MP_OBJ_NEW_QSTR(MP_QSTR_machine), (mp_obj_t)&mp_module_machine }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_network), (mp_obj_t)&mp_module_network }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR__onewire), (mp_obj_t)&mp_module_onewire }, \
-	TOUCH_MODULE \
-	TFTLCD_MODULE \
-	GUI_MODULE \
-	SENSOR_MODULE \
-	USB_CAM_MODULE \
-	GAME_MODULE \
-	CONTROLLER_MODULE \
-	USB_ESPAI_MODULE \
 	ESP_DRONE_MODULE \
 
 #define MP_STATE_PORT MP_STATE_VM
@@ -331,8 +267,7 @@ struct mp_bluetooth_nimble_root_pointers_t;
     mp_obj_t machine_pin_irq_handler[40]; \
     struct _machine_timer_obj_t *machine_timer_obj_head; \
     struct _machine_i2s_obj_t *machine_i2s_obj[I2S_NUM_MAX]; \
-    MICROPY_PORT_ROOT_POINTER_BLUETOOTH_NIMBLE \
-	MICROPY_PORT_ROOT_GUI
+    MICROPY_PORT_ROOT_POINTER_BLUETOOTH_NIMBLE 
 
 
 // type definitions for the specific machine
